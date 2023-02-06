@@ -18,3 +18,12 @@
 - 無法使用瀏覽器回上一頁、到下一頁的按鈕
 - 無法將頁面加入書籤
 - 這就是為何要使用 React Router
+
+## Client Side Routing
+
+- 僅使用 client side routing 的網站就是 SPA(single-page-applications)
+- 使用 javascript 透過名為 history 的 web api 來操作 URL bar
+
+## React Router
+
+- https://reactrouter.com/en/main
