@@ -23,3 +23,21 @@ function toggleBoolean(arr, idx) {
 const arr = Array(5).fill(false);
 console.log(arr);
 ```
+### 手刻map
+- callback
+```javascript
+Array.prototype.myMap = function(callback) {
+  const newArray = [];
+  for(let i=0; i<this.length; i++){  
+    newArray.push(callback(this[i], i, this))
+  }
+  return newArray;
+};
+
+[23, 65, 98, 5, 13].myMap(item => item * 2);
+// [46, 130, 196, 10, 26]
+["naomi", "quincy", "camperbot"].myMap(element => element.toUpperCase());
+// ["NAOMI", "QUINCY", "CAMPERBOT"]
+[1, 1, 2, 5, 2].myMap((element, index, array) => array[index + 1] || array[0]) 
+//[1, 2, 5, 2, 1]
+```

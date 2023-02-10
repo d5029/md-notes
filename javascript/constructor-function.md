@@ -193,3 +193,148 @@ console.log(o.d); // undefined
 - 這是原型鏈的結末，因為 null 按照定義並沒有 [[Prototype]]。
 - 因此，整個原型鏈看起來就像：
 - {a: 1, b: 2} ---> {b: 3, c: 4} ---> Object.prototype ---> null
+## 使用 Object.create 建立多層繼承
+- 使用這方法不能繼承父層的constructor，必須透過call()把父層的建構函式帶進來
+```javascript
+function Animal(family) {
+ this.kingdom = '動物界';
+ this.family = family || '人科';
+}
+Animal.prototype.move = function() {
+ console.log(this.name + ' 移動');
+}
+function Dog(name, color, size) {
+ this.name = name;
+ this.color = color || ' 白色';
+ this.size = size || ' 小';
+}
+// 這一行代表的是：Dog的原型繼承Animal的原型
+Dog.prototype = Object.create(Animal.prototype);
+Dog.prototype.bark = function() {
+ console.log(this.name + " 吠叫");
+};
+var Bibi = new Dog('比比', '棕色', '小');
+console.log(Bibi);
+```
+- Bibi console出來並沒有繼承到 `kingdom` 與 `family`
+- 這時要在Dog建構子加入 `call()`，現在Bibi也有了原型Animal的屬性
+```javascript
+function Dog(name, color, size) {
+ Animal.call(this, '犬科');
+ this.name = name;
+ this.color = color || ' 白色';
+ this.size = size || ' 小';
+}
+...
+console.log(Bibi);
+```
+## eat的動作如何共享給狗和鳥類
+```javascript
+function Animal() { }
+
+Animal.prototype = {
+  constructor: Animal,
+  eat: function() {
+    console.log("nom nom nom");
+  }
+};
+
+// Only change code below this line
+
+let duck=Object.create(Animal.prototype); // Change this line
+let beagle=Object.create(Animal.prototype); // Change this line
+```
+## 用 `Object.create()` 記得 `constructor` 要回到各自身上
+```javascript
+function Animal() { }
+function Bird() { }
+function Dog() { }
+
+Bird.prototype = Object.create(Animal.prototype);
+Dog.prototype = Object.create(Animal.prototype);
+
+// Only change code below this line
+Bird.prototype.constructor = Bird;
+Dog.prototype.constructor = Dog;
+
+
+let duck = new Bird();
+let beagle = new Dog();
+```
+## 繼承後添加 Method
+- Dog object繼承自Animal
+- Dog.prototype的constructor要設定成Dog
+- 新增一個bark()方法給Dog object
+- 因此beagle能繼承到eat()、bark()
+```javascript
+function Animal() { }
+Animal.prototype.eat = function() { console.log("nom nom nom"); };
+
+function Dog() { }
+Dog.prototype = Object.create(Animal.prototype);
+Dog.prototype.constructor=Dog;
+Dog.prototype.bark = function() { console.log("Woof!"); };
+
+let beagle = new Dog();
+console.log(beagle.eat());
+// nom nom nom
+console.log(beagle.bark());
+// Woof!
+```
+## 使用 Mixin 在不相關的obj之間添加共同的行為
+- 將 `glide` 的行為給 `bird` 和 `boat`
+```javascript
+let bird = {
+  name: "Donald",
+  numLegs: 2
+};
+
+let boat = {
+  name: "Warrior",
+  type: "race-boat"
+};
+
+function glideMixin(obj){
+  obj.glide=function(){
+    console.log('glide!')
+  }
+}
+glideMixin(bird);
+glideMixin(boat);
+```
+## 使用閉包保護對象內的屬性不被外部修改
+- 在這裡 `weight` 是私變數不能被外部修改
+```javascript
+function Bird() {
+  let weight = 15;
+  this.getWeight = function() { 
+    return weight;
+  }
+}
+```
+## 立即函式(IIFE)
+- 宣告完馬上執行
+```javascript
+(function(){
+  console.log("A cozy nest is ready");
+})();
+```
+## 使用 IIFE 建立module
+- `funModule` 模組有 `isCuteMixin` 與 `singMixin` 的兩個medthod
+- `funModule` 應該 `return` 一個object
+```javascript
+let funModule = (function(){
+  return {
+    isCuteMixin: function(obj) {
+      obj.isCute = function() {
+        return true;
+      };
+    },
+    singMixin: function(obj) {
+      obj.sing = function() {
+        console.log("Singing to an awesome tune");
+      };
+    }
+  }
+})();
+```
