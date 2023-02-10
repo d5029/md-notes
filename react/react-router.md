@@ -27,13 +27,15 @@
 ## React Router
 
 - https://reactrouter.com/en/main
-- 使用v6.4版
-- `<Link>` 組件要在被router的組件內才能使用
+- 使用 v6.4 版
+- `<Link>` 組件要在被 router 的組件內才能使用
 - `<NavLink>` 可以標記作用中的頁面
 
-## URL參數
-### Route的paht
-- component的屬性值變成路徑的一部分
+## URL 參數
+
+### Route 的 paht
+
+- component 的屬性值變成路徑的一部分
 - 路徑結果為：http://localhost:3000/soda/XXX
 - 文件
   - https://reactrouter.com/en/main/route/route#path
@@ -43,55 +45,75 @@
 ```javascript
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <VendingMachine />,
   },
   {
-    path: "/chips",
+    path: '/chips',
     element: <Chips />,
   },
   {
-    path: "/sardines",
+    path: '/sardines',
     element: <Sardines />,
   },
   {
-    path: "/soda",
+    path: '/soda',
     element: <Soda name={XXX} />,
   },
 ]);
 ```
-### 接收url的參數，使用useParams()
-- Hook不能再class組件內使用
+
+### 接收 url 的參數，使用 useParams()
+
+- Hook 不能再 class 組件內使用
 - https://zh-hans.reactjs.org/warnings/invalid-hook-call-warning.html
+
 ```javascript
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <VendingMachine />,
   },
   {
-    path: "/chips",
+    path: '/chips',
     element: <Chips />,
   },
   {
-    path: "/sardines",
+    path: '/sardines',
     element: <Sardines />,
   },
   {
-    path: "/soda/:name",
+    path: '/soda/:name',
     element: <Soda />,
   },
 ]);
 ```
+
 ```javascript
 // Soda.js
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams } from 'react-router-dom';
 
-function Soda () {
-  const {name} = useParams();
-    return (
-      <h1>SODAAAAA IS MY FAVORITE {name}</h1>
-    );
+function Soda() {
+  const { name } = useParams();
+  return <h1>SODAAAAA IS MY FAVORITE {name}</h1>;
 }
 ```
 
+## Route component
+
+-
+
+```javascript
+<Route
+  path="messages"
+  element={<Messages />}
+  loader={loadMessages}
+  handle={{
+    // you can put whatever you want on a route handle
+    // here we use "crumb" and return some elements,
+    // this is what we'll render in the breadcrumbs
+    // for this route
+    crumb: () => <Link to="/messages">Messages</Link>,
+  }}
+>
+```
