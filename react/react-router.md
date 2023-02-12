@@ -117,3 +117,34 @@ function Soda() {
   }}
 >
 ```
+
+## React Router 的基本設定
+
+```javascript
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Navbar from './Navbar';
+import App from './App';
+import About from './About';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <App />,
+  },
+  {
+    path: 'about',
+    element: <About />,
+  },
+]);
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    // 
+    <Navbar />
+    <RouterProvider router={router} />
+  </React.StrictMode>
+);
+```
