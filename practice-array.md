@@ -41,3 +41,23 @@ Array.prototype.myMap = function(callback) {
 [1, 1, 2, 5, 2].myMap((element, index, array) => array[index + 1] || array[0]) 
 //[1, 2, 5, 2, 1]
 ```
+### 手刻filter
+- callback
+```javascript
+Array.prototype.myFilter = function(callback) {
+  const newArray = [];
+  this.forEach((a,index)=>{
+    if(callback(a,index,this)){
+      newArray.push(a)
+    }
+  })
+  return newArray;
+};
+
+[23, 65, 98, 5, 13].myFilter(item => item % 2);
+//[23, 65, 5, 13].
+["naomi", "quincy", "camperbot"].myFilter(element => element === "naomi");
+//["naomi"].
+[1, 1, 2, 5, 2].myFilter((element, index, array) => array.indexOf(element) === index);
+//[1, 2, 5]
+```
