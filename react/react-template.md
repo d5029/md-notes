@@ -1,4 +1,29 @@
-# children
+# 模板template
+## 如何製作Layout模板
+```javascript
+// Layout.js
+import React from "react"
+export default ({ children }) => (
+  <div>
+    <h1>我是header</h1>
+    {children}
+    <h1>我是footer</h1>
+  </div>
+)
+```
+```javascript
+// App.js
+import React from "react"
+import Layout from "../components/layout"
+export default () => (
+  <Layout>
+    <p>
+      我是內容
+    </p>
+  </Layout>
+)
+```
+## children
 - 要用 `<元素名稱></元素名稱>` 的形式
 - 使用 `this.props.children`
 - 在react component中，把包在標籤中間的東西，稱為children。
