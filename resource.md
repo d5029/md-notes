@@ -14,6 +14,8 @@
 | 名稱                    | 網址                                                  | 備註     |
 | :---------------------- | :---------------------------------------------------- | :------- |
 | react-copy-to-clipboard | https://www.npmjs.com/package/react-copy-to-clipboard | 拷貝功能 |
+| rc-slider               | https://www.npmjs.com/package/rc-slider               | 滑塊     |
+| Material UI             | https://mui.com/                                      | React UI |
 
 ## 開發
 
@@ -27,9 +29,10 @@
 | :------------ | :------------------------------ | :----- |
 | Deck of Cards | https://www.deckofcardsapi.com/ | 撲克牌 |
 | dad joke      | https://icanhazdadjoke.com/     | 笑話   |
+
 ## AI
 
-| 名稱          | 網址                            | 備註   |
-| :------------ | :------------------------------ | :----- |
-| DataRobot | https://www.datarobot.com/ | AI平台 |
-| ChatGPT | https://chat.openai.com/chat | AI聊天機器人 |
+| 名稱      | 網址                         | 備註          |
+| :-------- | :--------------------------- | :------------ |
+| DataRobot | https://www.datarobot.com/   | AI 平台       |
+| ChatGPT   | https://chat.openai.com/chat | AI 聊天機器人 |
