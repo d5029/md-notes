@@ -49,3 +49,19 @@ function titleCase(str) {
 titleCase("I'm a little tea pot.");
 // 'ImALittleTeaPot'
 ```
+## 駝峰命名拆解
+- `?=` 設定被某字元(字串)接續在後
+```javascript
+function spinalCase(str) {
+  return str.split(/[^0-9a-zA-Z]|(?=[A-Z])/g).join('-').toLowerCase();
+}
+
+spinalCase('This Is Spinal Tap'); 
+//this-is-spinal-tap
+spinalCase("The_Andy_Griffith_Show"); 
+//the-andy-griffith-show
+spinalCase("Teletubbies say Eh-oh"); 
+//teletubbies-say-eh-oh
+spinalCase("AllThe-small Things");
+//all-the-small-things
+```
